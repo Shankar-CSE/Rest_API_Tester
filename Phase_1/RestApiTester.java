@@ -117,3 +117,9 @@ class ApiResponse {
         return body;
     }
 }
+
+
+// Sample url for testing 
+
+// https://api.restful-api.dev/objects
+// https://jsonplaceholder.typicode.com/todos
