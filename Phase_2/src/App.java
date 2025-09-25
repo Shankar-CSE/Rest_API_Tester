@@ -90,11 +90,12 @@ public class App {
         while (true) {
             System.out.println("\nDatabase Operations:");
             System.out.println("1. Find All Requests");
-            System.out.println("2. Find First Request");
+            System.out.println("2. Find Last Inserted Request");
             System.out.println("3. Find Request by Custom ID (request_id)");
             System.out.println("4. Find Request by MongoDB _id");
             System.out.println("5. Delete Request by MongoDB _id");
-            System.out.println("6. Back to Main Menu");
+            System.out.println("6. Delete Database");
+            System.out.println("7. Back to Main Menu");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -104,7 +105,7 @@ public class App {
                     crudFunctions.findAll();
                     break;
                 case "2":
-                    crudFunctions.findOne();
+                    crudFunctions.findLastInserted();
                     break;
                 case "3":
                     System.out.print("Enter custom request_id to find: ");
@@ -126,6 +127,10 @@ public class App {
                     crudFunctions.deleteById(mongoIdToDelete);
                     break;
                 case "6":
+                    crudFunctions.dropDatabase();
+                    System.out.println("Database has been deleted. Exiting to main menu as the connection context is lost.");
+                    return; // Return to main menu as database is gone
+                case "7":
                     System.out.println("Returning to Main Menu.");
                     return; // Exit the database history loop
                 default:

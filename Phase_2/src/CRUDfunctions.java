@@ -5,6 +5,7 @@ import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.ReturnDocument;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import static com.mongodb.client.model.Filters.*;
@@ -61,12 +62,14 @@ public class CRUDfunctions {
         return (counterDoc != null) ? counterDoc.getLong("sequence_value") - 1 : -1;
     }
     /**
-     * Finds and prints the first document in the collection.
+     * Finds and prints the last inserted document in the collection by sorting by request_id.
      */
-    public void findOne() {
+    public void findLastInserted() {
         MongoCollection<Document> ApiCollection = database.getCollection("users");
-        Document document = ApiCollection.find().first();
-        System.out.println("--- Finding First Document ---");
+        // Sort by request_id descending to get the latest document
+        Bson sort = new Document("request_id", -1);
+        Document document = ApiCollection.find().sort(sort).first();
+        System.out.println("--- Finding Last Inserted Document ---");
         if (document != null) {
             System.out.println(document.toJson());
         } else {
@@ -140,6 +143,15 @@ public class CRUDfunctions {
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid ID format. Please provide a valid ObjectId string.");
         }
+    }
+
+    /**
+     * Drops the entire database.
+     */
+    public void dropDatabase() {
+        System.out.println("--- Deleting Database: " + database.getName() + " ---");
+        database.drop();
+        System.out.println("Database '" + database.getName() + "' deleted successfully.");
     }
 
     private MongoDatabase connect(){
