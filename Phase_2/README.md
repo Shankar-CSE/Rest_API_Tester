@@ -14,4 +14,20 @@
 MongoDatabase database = mongoClient.getDatabase("databaseName");
 MongoCollection<Document> collection = database.getCollection("collectionName");
 
-### Connection with AuthenticationMongoCredential credential = MongoCredential.
+## Flow driver creation
+
+Drivers are merged in to single driver => App-all.jar.
+
+App.java file access the driver from the lib forlder 
+(driver folder contants only old drivers ehich are all now necessary)
+
+build-fatjar.bat file will create the App-all.jar file from old drivers which is enought to connect MongoDb with java project
+
+
+## Run Command
+
+(move to the Phase_2 directory)
+then run this command 
+```
+./run.bat
+```
