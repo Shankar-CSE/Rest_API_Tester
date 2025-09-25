@@ -1,33 +1,36 @@
+# Phase 2: REST API Tester with MongoDB
 
-# Phase 2 Database Connectivity Guide
+This guide explains how to set up and run the enhanced version of the REST API Tester, which includes database connectivity to store request history.
 
-## MongoDB Connection
+---
 
-### Prerequisites
-- MongoDB installed and running
-- Database and collection created
-- MongoDB Compass (optional) for GUI management
-- Network access configured (if using MongoDB Atlas)
-- Authentication credentials ready (username/password)
+## 1. Prerequisites
 
-### Basic ConnectionMongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-MongoDatabase database = mongoClient.getDatabase("databaseName");
-MongoCollection<Document> collection = database.getCollection("collectionName");
+- **Java Development Kit (JDK)**: Ensure you have a JDK installed and configured.
+- **MongoDB**: A local MongoDB instance must be running. The application connects to `mongodb://localhost:27017` by default.
+- **MongoDB Compass (Optional)**: A useful GUI tool for viewing the data stored in the `RestAPI_Tester` database and `Requests` collection.
 
-## Flow driver creation
+The application will automatically create the `RestAPI_Tester` database and the `Requests` collection on its first run.
 
-Drivers are merged in to single driver => App-all.jar.
+---
 
-App.java file access the driver from the lib forlder 
-(driver folder contants only old drivers ehich are all now necessary)
+## 2. Build & Run
 
-build-fatjar.bat file will create the App-all.jar file from old drivers which is enought to connect MongoDb with java project
+The project includes scripts to simplify compilation and execution.
 
+### To Run the Application
 
-## Run Command
+Navigate to the `Phase_2` directory in your terminal and execute the `run.bat` script. This script handles compiling all necessary `.java` files and running the application.
 
-(move to the Phase_2 directory)
-then run this command 
+```bash
+# Make sure you are in the Phase_2 directory
+./run.bat
+```
+
+### To Build a Distributable JAR (Optional)
+
+If you want to create a single, self-contained "fat JAR" that includes all dependencies, you can run the `build-fatjar.bat` script.
+
 ```
 ./run.bat
 ```

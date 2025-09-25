@@ -24,7 +24,7 @@ public class CRUDfunctions {
 
     public void insert(String apiurl, String methord, String payload, String response) {
         // Use the database instance established in the constructor
-        MongoCollection<Document> ApiCollection = database.getCollection("users");
+        MongoCollection<Document> ApiCollection = database.getCollection("Requests");
         
         // Get the next auto-incremented ID
         long requestId = getNextRequestId();
@@ -65,7 +65,7 @@ public class CRUDfunctions {
      * Finds and prints the last inserted document in the collection by sorting by request_id.
      */
     public void findLastInserted() {
-        MongoCollection<Document> ApiCollection = database.getCollection("users");
+        MongoCollection<Document> ApiCollection = database.getCollection("Requests");
         // Sort by request_id descending to get the latest document
         Bson sort = new Document("request_id", -1);
         Document document = ApiCollection.find().sort(sort).first();
@@ -81,7 +81,7 @@ public class CRUDfunctions {
      * Finds and prints all documents in the collection.
      */
     public void findAll() {
-        MongoCollection<Document> ApiCollection = database.getCollection("users");
+        MongoCollection<Document> ApiCollection = database.getCollection("Requests");
         System.out.println("--- Finding All Documents ---");
         try (MongoCursor<Document> cursor = ApiCollection.find().iterator()) {
             if (!cursor.hasNext()) {
@@ -99,7 +99,7 @@ public class CRUDfunctions {
      * @param idString The string representation of the document's _id.
      */
     public void findById(String idString) {
-        MongoCollection<Document> ApiCollection = database.getCollection("users");
+        MongoCollection<Document> ApiCollection = database.getCollection("Requests");
         System.out.println("--- Finding Document by ID: " + idString + " ---");
         try {
             Document doc = ApiCollection.find(eq("_id", new ObjectId(idString))).first();
@@ -119,7 +119,7 @@ public class CRUDfunctions {
      * @return The found Document, or null if not found.
      */
     public Document findByRequestId(long requestId) {
-        MongoCollection<Document> ApiCollection = database.getCollection("users");
+        MongoCollection<Document> ApiCollection = database.getCollection("Requests");
         System.out.println("--- Finding Document by request_id: " + requestId + " ---");
         Document doc = ApiCollection.find(eq("request_id", requestId)).first();
         if (doc != null) {
@@ -135,7 +135,7 @@ public class CRUDfunctions {
      * @param idString The string representation of the document's _id to delete.
      */
     public void deleteById(String idString) {
-        MongoCollection<Document> ApiCollection = database.getCollection("users");
+        MongoCollection<Document> ApiCollection = database.getCollection("Requests");
         System.out.println("--- Deleting Document by ID: " + idString + " ---");
         try {
             DeleteResult result = ApiCollection.deleteOne(eq("_id", new ObjectId(idString)));
@@ -158,14 +158,14 @@ public class CRUDfunctions {
         MongoConnection.testConnection();
 
         // Get "demo" database
-        MongoDatabase database = MongoConnection.getDatabase("demo");
+        MongoDatabase database = MongoConnection.getDatabase("RestAPI_Tester");
 
         // Create collection "users" (only once, else it will throw error if already exists)
         try {
-            database.createCollection("users");
-            System.out.println("\nCollection 'users' created.\n");
+            database.createCollection("Requests");
+            System.out.println("\nCollection 'Requests' created.\n");
         } catch (Exception e) {
-            System.out.println("\nCollection 'users' might already exist.\n");
+            System.out.println("\nCollection 'Requests' might already exist.\n");
         }
         return database;
     }

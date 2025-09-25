@@ -33,7 +33,7 @@ public class MongoConnection {
 
     // Optional: ping method to test connection
     public static void testConnection() {
-        MongoDatabase database = getDatabase("demo");
+        MongoDatabase database = getDatabase("RestAPI_Tester");
         database.runCommand(new Document("ping", 1));
         System.out.println("\nConnection successful: Pinged MongoDB!\n");
     }

@@ -1,102 +1,79 @@
+# REST API Tester
 
-
-
-# REST API Tester (Java CLI)
-
-A lightweight **command-line REST API tester** written in Java.  
-Think of it as a mini **Postman/Insomnia**, but directly in your terminal. 🚀  
+This project contains two versions of a REST API testing tool: a simple command-line interface (CLI) and an enhanced version with MongoDB integration to save request history.
 
 ---
 
-## ✨ Features
-- Enter any API **URL** and choose **HTTP method** (`GET`, `POST`, `PUT`, `DELETE`).
-- Supports **JSON payload input** for `POST` and `PUT`.
-- Prints **HTTP status code** and **response body**.
-- Handles **error messages** if the request fails.
-- Runs in a simple loop until you type `exit`.
+## Phases
+
+This project is divided into two phases:
+
+*   **Phase 1:** A lightweight, dependency-free CLI for making simple HTTP requests.
+*   **Phase 2:** An enhanced version that stores request and response data in a MongoDB database.
 
 ---
 
-## 📦 Setup & Run
+## Phase 1: Simple CLI Tool
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/Shankar-CSE/Rest_API_Tester.git
-cd Rest_API_Tester
-````
+This is the original, lightweight version of the REST API Tester. It's a single Java file with no external dependencies, perfect for quick, simple API testing directly in your terminal.
 
-### 2. Compile the Java program
+### Features
 
-```bash
-javac RestApiTester.java
-```
+-   Enter any API **URL** and choose **HTTP method** (`GET`, `POST`, `PUT`, `DELETE`).
+-   Supports **JSON payload input** for `POST` and `PUT`.
+-   Prints **HTTP status code** and **response body**.
 
-### 3. Run the program
+### Setup & Run
 
-```bash
-java RestApiTester
-```
+1.  **Navigate to the `Phase_1` directory**.
+2.  **Compile and run the Java program**:
 
----
-
-## 🖥️ Usage Example
-
-```text
-=== Simple REST API Tester ===
-
-Enter URL (or type 'exit' to quit): https://jsonplaceholder.typicode.com/posts/1
-Enter HTTP Method (GET/POST/PUT/DELETE): GET
-
---- Response ---
-Status: 200
-Body:
-{
-  "userId": 1,
-  "id": 1,
-  "title": "sunt aut facere repellat provident occaecati",
-  "body": "quia et suscipit..."
-}
-
-===============================
-```
-
-Example with **POST** request:
-
-```text
-Enter URL (or type 'exit' to quit): https://jsonplaceholder.typicode.com/posts
-Enter HTTP Method (GET/POST/PUT/DELETE): POST
-Enter JSON payload (end with a single line 'END'):
-{
-  "title": "foo",
-  "body": "bar",
-  "userId": 1
-}
-END
-
---- Response ---
-Status: 201
-Body:
-{
-  "id": 101,
-  "title": "foo",
-  "body": "bar",
-  "userId": 1
-}
-```
+    ```bash
+    javac RestApiTester.java
+    java RestApiTester
+    ```
 
 ---
 
-## 📂 Project Structure
+## Phase 2: Enhanced Tool with MongoDB
+
+This version expands on the original by adding a MongoDB backend to persist request history.
+
+### Features
+
+-   All features from Phase 1.
+-   Saves each request's URL, method, payload, and the response (status and body) to a MongoDB database.
+-   Automatically creates the `RestAPI_Tester` database and `Requests` collection.
+
+### Prerequisites
+
+-   **Java Development Kit (JDK)**
+-   **MongoDB**: A local instance must be running at `mongodb://localhost:27017`.
+
+### Build & Run
+
+1.  **Navigate to the `Phase_2` directory**.
+2.  **Execute the `run.bat` script**:
+
+    ```bash
+    ./run.bat
+    ```
+
+    This script compiles all source files and runs the application.
+
+---
+
+## Project Structure
 
 ```
 .
-├── RestApiTester.java   # Main program
-└── README.md            # Documentation
+├── Phase_1/               # Simple, dependency-free CLI tool
+│   ├── RestApiTester.java
+│   └── README.md
+├── Phase_2/               # Enhanced tool with MongoDB integration
+│   ├── src/
+│   ├── lib/
+│   ├── run.bat
+│   └── README.md
+└── README.md              # This file
 ```
-
----
-
-
-Happy testing! 🎉
-
-
