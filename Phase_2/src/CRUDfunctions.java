@@ -51,6 +51,16 @@ public class CRUDfunctions {
     }
 
     /**
+     * Retrieves the last assigned request ID from the counter.
+     * This is useful for displaying the ID of a newly inserted document.
+     * @return The last assigned request ID, or -1 if counter not found.
+     */
+    public long getLastRequestId() {
+        MongoCollection<Document> counters = database.getCollection("counters");
+        Document counterDoc = counters.find(eq("_id", "request_id")).first();
+        return (counterDoc != null) ? counterDoc.getLong("sequence_value") - 1 : -1;
+    }
+    /**
      * Finds and prints the first document in the collection.
      */
     public void findOne() {
