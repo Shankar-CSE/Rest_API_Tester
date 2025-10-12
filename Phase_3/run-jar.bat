@@ -1,0 +1,1 @@
+java --module-path "C:\javafx\lib" --add-modules javafx.controls -jar Phase_3.jar
